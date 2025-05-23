@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi Perfil - IA-Lovers</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html">← Volver</a>
+      <button class="btn-outline" onclick="logoutUser()">Cerrar sesión</button>
+    </div>
+  </header>
+  <main class="container" style="max-width:600px; margin:80px auto;">
+    <h2>Mi Perfil</h2>
+    <p><strong>Usuario:</strong> <span id="profileUser"></span></p>
+  </main>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const u = localStorage.getItem('currentUser');
+      if (!u) return location.href = 'login.html';
+      document.getElementById('profileUser').textContent = u;
+    });
+  </script>
+</body>
+</html>

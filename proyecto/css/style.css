@@ -1,0 +1,95 @@
+/* Reset & variables */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#4f46e5;--light:#f3f4f6;--dark:#1f2937;--gap:16px}
+body{font-family:'Segoe UI',sans-serif;background:var(--light);color:var(--dark)}
+.container{width:90%;max-width:1200px;margin:auto}
+a{text-decoration:none}
+.btn-solid{background:var(--primary);color:#fff;padding:8px 16px;border-radius:24px;transition:opacity .2s}
+.btn-solid:hover{opacity:.8}
+.btn-outline{border:2px solid var(--primary);color:var(--primary);padding:6px 14px;border-radius:24px;transition:background .2s}
+.btn-outline:hover{background:var(--primary);color:#fff}
+.hidden{display:none}
+.header{background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.1);position:sticky;top:0;z-index:10}
+.header__inner{display:flex;align-items:center;justify-content:space-between;padding:var(--gap) 0}
+.logo img{height:40px;margin-right:8px}
+#searchInput{flex:1;margin:0 var(--gap);padding:8px 12px;border-radius:999px;border:1px solid #ccc}
+#cartCount{background:red;color:#fff;border-radius:50%;padding:2px 6px;font-size:.8rem;margin-left:4px}
+.hero{text-align:center;padding:80px 0;background:url('css/hero-bg.jpg') center/cover no-repeat;animation:fadeIn 1s ease-in}
+.hero h1{font-size:3rem;margin-bottom:12px}
+.hero p{font-size:1.25rem}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* Pestañas */
+.section-tabs{display:flex;justify-content:center;gap:16px;margin:32px 0}
+.tab-btn{padding:8px 16px;border:none;border-radius:24px;cursor:pointer;background:var(--light);color:var(--dark);transition:background .2s}
+.tab-btn.active{background:var(--primary);color:#fff}
+/* Catálogo */
+.catalog{display:none}
+.catalog.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:24px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:transform .3s}
+.card:hover{transform:translateY(-5px) scale(1.02)}
+.card img{width:100%;height:150px;object-fit:cover}
+.card-body{padding:12px}
+.card-body h3{font-size:1.1rem;margin-bottom:8px}
+.card-body button{background:var(--primary);color:#fff;border:none;padding:6px 12px;border-radius:12px;cursor:pointer;transition:opacity .2s}
+.card-body button:hover{opacity:.8}
+/* Auth Container */
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--light);
+  padding: 16px;
+}
+.auth-card {
+  background: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+.auth-card h2 {
+  margin-bottom: 24px;
+  font-size: 1.75rem;
+  text-align: center;
+  color: var(--dark);
+}
+.auth-form .form-group {
+  margin-bottom: 16px;
+}
+.auth-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark);
+}
+.auth-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.auth-form input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+.btn-full {
+  width: 100%;
+}
+.auth-footer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+.auth-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.auth-footer a:hover {
+  text-decoration: underline;
+}

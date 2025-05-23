@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar Sesión - IA-Lovers</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth-container">
+    <div class="auth-card">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginUser">Usuario</label>
+          <input type="text" id="loginUser" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Contraseña</label>
+          <input type="password" id="loginPass" required>
+        </div>
+        <button type="submit" class="btn-solid btn-full">Entrar</button>
+      </form>
+      <p class="auth-footer">¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('loginForm')
+      .addEventListener('submit', e => {
+        e.preventDefault();
+        loginUser(
+          document.getElementById('loginUser').value,
+          document.getElementById('loginPass').value
+        );
+      });
+  </script>
+</body>
+</html>

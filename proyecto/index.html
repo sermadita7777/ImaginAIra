@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IA-Lovers</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="logo">
+        <img src="imagenes/logo.png" alt="IA-Lovers Logo">
+        <span>IA-Lovers</span>
+      </div>
+      <input id="searchInput" type="text" placeholder="Buscar contenido...">
+      <nav id="authNav">
+        <a href="login.html" class="btn-outline">Iniciar Sesión</a>
+        <a href="register.html" class="btn-solid">Registro</a>
+      </nav>
+      <nav id="userNav" class="hidden">
+        <a href="profile.html">Mi Perfil</a>
+        <a href="cart.html" class="icon">🛒<span id="cartCount">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Bienvenido a IA-Lovers</h1>
+      <p>Descubre, comparte y descarga memes, arte y literatura creada con IA.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Pestañas de categorías -->
+    <div class="section-tabs">
+      <button class="tab-btn active" data-cat="memes">Memes</button>
+      <button class="tab-btn" data-cat="arte">Arte</button>
+      <button class="tab-btn" data-cat="literatura">Literatura</button>
+    </div>
+
+    <!-- Secciones de catálogo -->
+    <section id="memes" class="catalog active">
+      <h2>Memes</h2>
+      <div class="grid" id="memesGrid"></div>
+    </section>
+    <section id="arte" class="catalog">
+      <h2>Arte</h2>
+      <div class="grid" id="arteGrid"></div>
+    </section>
+    <section id="literatura" class="catalog">
+      <h2>Literatura</h2>
+      <div class="grid" id="literaturaGrid"></div>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
