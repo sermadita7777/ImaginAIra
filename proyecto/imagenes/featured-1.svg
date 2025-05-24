@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa" />
+  
+  <!-- Abstract Landscape -->
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c63ff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#43b1ff;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6584;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#ff8c66;stop-opacity:0.5" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky -->
+  <rect x="0" y="0" width="400" height="200" fill="url(#skyGrad)" />
+  
+  <!-- Ground/Horizon -->
+  <path d="M0,200 C50,180 100,190 150,170 C200,150 250,160 300,180 C350,200 400,190 400,200 L400,300 L0,300 Z" fill="url(#groundGrad)" />
+  
+  <!-- Floating Islands -->
+  <ellipse cx="100" cy="120" rx="40" ry="15" fill="#fff" opacity="0.9" />
+  <ellipse cx="90" cy="118" rx="30" ry="10" fill="#4ade80" opacity="0.8" />
+  <path d="M80,110 L85,100 L90,108 L95,95 L100,105" stroke="#fff" stroke-width="2" fill="none" />
+  
+  <ellipse cx="250" cy="90" rx="50" ry="20" fill="#fff" opacity="0.9" />
+  <ellipse cx="240" cy="88" rx="40" ry="15" fill="#4ade80" opacity="0.8" />
+  <path d="M220,80 L230,65 L240,75 L250,60 L260,70" stroke="#fff" stroke-width="2" fill="none" />
+  
+  <!-- Floating Structures -->
+  <path d="M300,150 L320,130 L340,150 L320,170 Z" fill="#fff" opacity="0.9" />
+  <circle cx="320" cy="150" r="10" fill="#ff6584" opacity="0.8" />
+  
+  <!-- Glowing Orbs -->
+  <circle cx="50" cy="50" r="10" fill="#fff" opacity="0.8">
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="350" cy="80" r="15" fill="#fff" opacity="0.8">
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="200" cy="40" r="8" fill="#fff" opacity="0.8">
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- Connecting Lines -->
+  <path d="M50,50 C100,30 150,70 200,40" stroke="#fff" stroke-width="1" fill="none" opacity="0.5" />
+  <path d="M200,40 C250,60 300,20 350,80" stroke="#fff" stroke-width="1" fill="none" opacity="0.5" />
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa" />
+  
+  <!-- Book Cover Design -->
+  <rect x="100" y="50" width="200" height="250" rx="5" ry="5" fill="#6c63ff" />
+  
+  <!-- Book Title Area -->
+  <rect x="120" y="80" width="160" height="60" rx="3" ry="3" fill="#fff" opacity="0.9" />
+  
+  <!-- Title Text Representation -->
+  <rect x="140" y="100" width="120" height="8" rx="4" ry="4" fill="#333" />
+  <rect x="160" y="115" width="80" height="6" rx="3" ry="3" fill="#333" opacity="0.8" />
+  
+  <!-- Book Illustration -->
+  <circle cx="200" cy="180" r="40" fill="#ff6584" opacity="0.8" />
+  
+  <!-- Abstract Elements -->
+  <path d="M160,180 C180,150 220,150 240,180" stroke="#fff" stroke-width="3" fill="none" />
+  <path d="M170,200 C190,230 210,230 230,200" stroke="#fff" stroke-width="3" fill="none" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="180" cy="170" r="5" fill="#fff" opacity="0.8" />
+  <circle cx="220" cy="170" r="5" fill="#fff" opacity="0.8" />
+  
+  <!-- Page Edges -->
+  <rect x="290" y="60" width="10" height="230" rx="2" ry="2" fill="#eee" />
+  <rect x="295" y="65" width="5" height="220" rx="1" ry="1" fill="#ddd" />
+  
+  <!-- Author Name Representation -->
+  <rect x="140" y="230" width="80" height="5" rx="2.5" ry="2.5" fill="#333" opacity="0.6" />
+  <rect x="140" y="240" width="60" height="5" rx="2.5" ry="2.5" fill="#333" opacity="0.4" />
+</svg>
