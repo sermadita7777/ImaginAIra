@@ -1,59 +1,99 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* ─────────── Carrito ─────────── */
-  const cartCountEl = document.getElementById('cartCount');
-  let   cart        = JSON.parse(localStorage.getItem('iaCart') || '[]');
-  if (cartCountEl) cartCountEl.textContent = cart.length;
+  // Estado de usuario
+  const currentUser = localStorage.getItem('currentUser');
 
-  window.addToCart = item => {
-    cart.push(item);
+  /* ────── Carrito ────── */
+  const cartCountEl = document.getElementById('cartCount');
+  let cart = JSON.parse(localStorage.getItem('iaCart') || '[]');
+  if (cartCountEl) cartCountEl.textContent = cart.length;
+  window.addToCart = title => {
+    if (!currentUser) return location.href = 'login.html';
+    cart.push(title);
     localStorage.setItem('iaCart', JSON.stringify(cart));
-    if (cartCountEl) cartCountEl.textContent = cart.length;
+    cartCountEl.textContent = cart.length;
+    // opcional: POST '/api/cart/add'
   };
 
-  /* ─────────── Carga demo de catálogos ─────────── */
-  const cats = ['memes','arte','literatura'];
-  cats.forEach(cat => {
+  /* ────── Me gusta ────── */
+  window.likeItem = (btn, id) => {
+    if (!currentUser) return location.href = 'login.html';
+    const liked = btn.classList.toggle('liked');
+    // enviar al servidor
+    fetch('/api/like', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ user: currentUser, postId: id, like: liked })
+    });
+  };
+
+  /* ────── Fetch real de BD ────── */
+  let data = { memes: [], arte: [], literatura: [] };
+  fetch('/api/catalogo')
+    .then(res => res.json())
+    .then(json => data = json)
+    .then(() => renderCategory('memes'));
+
+  /* ────── Renderizar tarjetas ────── */
+  function renderCategory(cat) {
     const grid = document.getElementById(cat + 'Grid');
-    if (!grid) return;
-    for (let i = 1; i <= 8; i++) {
+    grid.innerHTML = '';
+    let items = data[cat] || [];
+
+    if (cat === 'literatura') {
+      const checked = Array.from(document.querySelectorAll('.lit-filter:checked'))
+        .map(cb => cb.value);
+      items = items.filter(item => checked.includes(item.tag));
+    }
+
+    items.forEach(item => {
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
-        <img src="/css/placeholder/${cat}-${i}.jpg" alt="${cat} ${i}">
+        <img src="${item.img}" alt="${item.title}">
         <div class="card-body">
-          <h3>${cat.charAt(0).toUpperCase() + cat.slice(1)} #${i}</h3>
-          <button onclick="addToCart('${cat} #${i}')">Agregar al carrito</button>
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+          <div class="card-actions">
+            <button onclick="likeItem(this, '${item.id}')"
+                    class="${item.liked ? 'liked' : ''}">
+              <i class="fas fa-heart"></i> ${item.likes || 0}
+            </button>
+            <button onclick="addToCart('${item.title}')">
+              <i class="fas fa-cart-plus"></i>
+            </button>
+          </div>
         </div>`;
       grid.appendChild(card);
-    }
-  });
-
-  /* ─────────── Buscador ─────────── */
-  const searchEl = document.getElementById('searchInput');
-  if (searchEl) {
-    searchEl.addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll('.card').forEach(card => {
-        card.style.display = 
-          card.querySelector('h3').textContent.toLowerCase().includes(q)
-            ? '' : 'none';
-      });
     });
   }
 
-  /* ─────────── Pestañas ─────────── */
-  const tabs = document.querySelectorAll('.tab-btn');
-  if (tabs.length) {
-    tabs.forEach(btn => btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('active'));
+  /* ────── Pestañas ────── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      cats.forEach(cat => {
-        const section = document.getElementById(cat);
-        if (section) section.classList.toggle('active', cat === btn.dataset.cat);
+      document.querySelectorAll('.catalog').forEach(sec => {
+        sec.classList.toggle('active', sec.id === btn.dataset.cat);
       });
-    }));
+      renderCategory(btn.dataset.cat);
+    });
+  });
 
-    const firstActive = document.querySelector('.tab-btn.active');
-    if (firstActive) firstActive.click();
-  }
+  /* ────── Búsqueda global ────── */
+  document.getElementById('searchInput').addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.display = c.querySelector('h3').textContent.toLowerCase().includes(q)
+        ? '' : 'none';
+    });
+  });
+
+  /* ────── Filtros literatura ────── */
+  document.querySelectorAll('.lit-filter').forEach(cb=>{
+    cb.addEventListener('change', ()=> {
+      if (document.querySelector('.tab-btn.active').dataset.cat === 'literatura') {
+        renderCategory('literatura');
+      }
+    });
+  });
 });
