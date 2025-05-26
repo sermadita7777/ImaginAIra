@@ -31,7 +31,7 @@ export async function signOut() {
 export async function getContentByCategory(category) {
   const { data, error } = await supabase
     .from('content_items')
-    .select('*')
+    .select('*, likes(count)')
     .eq('category', category);
   return { data, error };
 }
@@ -39,7 +39,7 @@ export async function getContentByCategory(category) {
 export async function addToLikes(contentId) {
   const { data, error } = await supabase
     .from('likes')
-    .insert([{ content_id: contentId }]);
+    .insert([{ content_id: contentId, user_id: supabase.auth.user()?.id }]);
   return { data, error };
 }
 
@@ -47,14 +47,14 @@ export async function removeLike(contentId) {
   const { data, error } = await supabase
     .from('likes')
     .delete()
-    .match({ content_id: contentId });
+    .match({ content_id: contentId, user_id: supabase.auth.user()?.id });
   return { data, error };
 }
 
 export async function addToCart(contentId) {
   const { data, error } = await supabase
     .from('cart_items')
-    .insert([{ content_id: contentId }]);
+    .insert([{ content_id: contentId, user_id: supabase.auth.user()?.id }]);
   return { data, error };
 }
 
@@ -62,7 +62,7 @@ export async function removeFromCart(contentId) {
   const { data, error } = await supabase
     .from('cart_items')
     .delete()
-    .match({ content_id: contentId });
+    .match({ content_id: contentId, user_id: supabase.auth.user()?.id });
   return { data, error };
 }
 
@@ -78,7 +78,8 @@ export async function getUserLikes() {
         category,
         likes
       )
-    `);
+    `)
+    .eq('user_id', supabase.auth.user()?.id);
   return { data, error };
 }
 
@@ -93,6 +94,7 @@ export async function getUserCart() {
         image_url,
         category
       )
-    `);
+    `)
+    .eq('user_id', supabase.auth.user()?.id);
   return { data, error };
 }
