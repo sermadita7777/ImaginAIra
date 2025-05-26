@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro - IA-Lovers</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <section class="section upload-container">
+      <div class="section-header">
+        <h2>Crear cuenta</h2>
+        <div class="underline"></div>
+      </div>
+      <form class="upload-form" id="registerForm">
+        <div class="form-group full-width">
+          <label for="username">Nombre de usuario</label>
+          <input type="text" id="username" name="username" class="form-control" required />
+        </div>
+        <div class="form-group full-width">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+        <div class="form-group full-width">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <div class="form-group full-width">
+          <label for="confirmPassword">Confirmar contraseña</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required />
+        </div>
+        <div class="upload-actions full-width">
+          <button type="submit" class="btn-primary">Registrarse</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Validación simple de contraseña
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      if (password !== confirm) {
+        alert('Las contraseñas no coinciden');
+        return;
+      }
+      alert('Registro enviado!');
+      // Aquí puedes agregar la lógica para enviar datos al backend
+      this.reset();
+    });
+  </script>
+</body>
+</html>
