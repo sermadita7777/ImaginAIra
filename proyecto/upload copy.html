@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA-Lovers - Subir Contenido</title>
+    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="imagenes/logo.png" alt="IA-Lovers Logo">
+                <span>IA-<span class="highlight">Lovers</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalog.html">Catálogo</a></li>
+                <li><a href="upload.html" class="active">Subir Contenido</a></li>
+                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Subir Contenido</h2>
+                <div class="underline"></div>
+                <br>
+                <p>Comparte tus creaciones con la comunidad</p>
+            </div>
+
+            <!-- Formulario de subida -->
+            <div class="upload-container">
+                <form id="uploadForm" class="upload-form">
+                    <!-- Título del contenido -->
+                    <div class="form-group">
+                        <label for="contentTitle">Título *</label>
+                        <input type="text" id="contentTitle" class="form-control" placeholder="Título de tu contenido"
+                            required>
+                    </div>
+
+                    <!-- Tipo de contenido -->
+                    <div class="form-group">
+                        <label for="contentType">Tipo de Contenido *</label>
+                        <select id="contentType" class="form-control" required>
+                            <option value="" disabled selected>Selecciona un tipo</option>
+                            <option value="memes">Meme</option>
+                            <option value="arte">Arte</option>
+                            <option value="literatura">Literatura</option>
+                        </select>
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="form-group full-width">
+                        <label for="contentDescription">Descripción *</label>
+                        <textarea id="contentDescription" class="form-control" placeholder="Describe tu contenido..."
+                            required></textarea>
+                    </div>
+
+                    <!-- Archivo principal -->
+                    <div class="form-group full-width">
+                        <label>Archivo Principal *</label>
+                        <div class="file-upload-container">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Arrastra y suelta tu archivo aquí o haz clic para seleccionar</p>
+                            <input type="file" id="contentFile" accept="image/jpeg,image/jpg,image/png,application/pdf"
+                                required>
+                            <small>Formatos permitidos: JPG/PNG para memes y arte, PDF para literatura</small>
+                        </div>
+                        <div id="filePreview" class="file-preview">
+                            <img id="previewImg" src="#" alt="Vista previa">
+                        </div>
+                    </div>
+
+                    <!-- Miniatura (requerida para literatura) -->
+                    <div class="form-group thumbnail-group">
+                        <label>Miniatura (opcional)</label>
+                        <div class="thumbnail-upload-container">
+                            <i class="fas fa-image"></i>
+                            <p>Arrastra una imagen o haz clic para seleccionar</p>
+                            <small>Solo JPG/PNG - Recomendado: 300x200px (opcional)</small>
+                            <input type="file" id="contentThumbnail" accept="image/jpeg,image/jpg,image/png">
+                        </div>
+                        <div id="thumbnailPreview" class="thumbnail-preview">
+                            <img id="previewThumbnail" src="#" alt="Vista previa de miniatura">
+                        </div>
+                    </div>
+
+                    <!-- Etiquetas para literatura -->
+                    <div id="literatureTags" class="form-group" style="display: none;">
+                        <label>Etiquetas para Literatura</label>
+                        <div class="tags-container">
+                            <div class="tag" data-tag="ficcion">
+                                <i class="fas fa-book"></i> Ficción
+                            </div>
+                            <div class="tag" data-tag="poesia">
+                                <i class="fas fa-feather-alt"></i> Poesía
+                            </div>
+                            <div class="tag" data-tag="ensayo">
+                                <i class="fas fa-pen-fancy"></i> Ensayo
+                            </div>
+                            <div class="tag" data-tag="ciencia-ficcion">
+                                <i class="fas fa-rocket"></i> Ciencia Ficción
+                            </div>
+                            <div class="tag" data-tag="fantasia">
+                                <i class="fas fa-hat-wizard"></i> Fantasía
+                            </div>
+                            <div class="tag" data-tag="terror">
+                                <i class="fas fa-ghost"></i> Terror
+                            </div>
+                            <div class="tag" data-tag="romance">
+                                <i class="fas fa-heart"></i> Romance
+                            </div>
+                            <div class="tag" data-tag="misterio">
+                                <i class="fas fa-search"></i> Misterio
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="upload-actions">
+                        <button type="button" class="btn-secondary"
+                            onclick="window.location.href='profile.html'">Cancelar</button>
+                        <button type="submit" class="btn-primary">Publicar Contenido</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Mensaje de éxito (inicialmente oculto) -->
+            <div class="upload-success">
+                <i class="fas fa-check-circle"></i>
+                <h3>¡Contenido publicado con éxito!</h3>
+                <p>Tu contenido ha sido publicado y ya está disponible en el catálogo.</p>
+                <a href="catalog.html" class="btn-primary">Ver en el Catálogo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>IA-<span class="highlight">Lovers</span></span>
+                    <p>Tu plataforma para contenido generado por IA</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navegación</h4>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="catalog.html">Catálogo</a></li>
+                            <li><a href="downloads.html">Mis Descargas</a></li>
+                            <li><a href="admin.html">Administración</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Términos de Uso</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-envelope"></i> contacto@ialovers.com</a></li>
+                            <li><a href="#"><i class="fas fa-phone"></i> +34 123 456 789</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 IA-Lovers. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/upload.js"></script>
+</body>
+
+</html>
