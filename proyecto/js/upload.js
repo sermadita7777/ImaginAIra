@@ -155,7 +155,7 @@ function initFilePreview() {
 
             const contentType = contentTypeSelect ? contentTypeSelect.value : '';
             const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-            const validLiteratureTypes = ['application/pdf'];
+            const validLiteratureTypes = ['application/pdf', 'text/plain'];
 
             if ((contentType === 'memes' || contentType === 'arte') && !validImageTypes.includes(file.type)) {
                 alert('Para memes y arte, solo se permiten archivos en formato JPG o PNG.');
@@ -163,7 +163,7 @@ function initFilePreview() {
             }
 
             if (contentType === 'literatura' && !validLiteratureTypes.includes(file.type)) {
-                alert('Para literatura, solo se permiten archivos en formato PDF.');
+                alert('Para literatura, solo se permiten archivos en formato PDF o TXT.');
                 return false;
             }
 
@@ -391,7 +391,7 @@ function initTagSelection() {
                 thumbnailInput.required = false; // Cambiado a false para hacerlo opcional
 
                 if (fileInput) {
-                    fileInput.setAttribute('accept', 'application/pdf');
+                    fileInput.setAttribute('accept', 'application/pdf,text/plain');
                     if (fileFormatInfo) {
                         fileFormatInfo.textContent = 'Formato permitido: PDF para literatura';
                     }
@@ -449,7 +449,8 @@ function initUploadForm() {
 
             // Validar el formato de archivo según el tipo de contenido
             const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-            const validLiteratureTypes = ['application/pdf'];
+			const validLiteratureTypes = ['application/pdf', 'text/plain'];
+
 
             if ((type === 'memes' || type === 'arte') && !validImageTypes.includes(file.type)) {
                 alert('Para memes y arte, solo se permiten archivos en formato JPG o PNG.');
@@ -457,7 +458,7 @@ function initUploadForm() {
             }
 
             if (type === 'literatura' && !validLiteratureTypes.includes(file.type)) {
-                alert('Para literatura, solo se permiten archivos en formato PDF.');
+                alert('Para literatura, solo se permiten archivos en formato PDF o TXT.');
                 return;
             }
 

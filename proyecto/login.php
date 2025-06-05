@@ -1,4 +1,5 @@
 <?php
+// login.php
 session_start();
 require 'db.php';
 
@@ -6,18 +7,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $identifier = trim($_POST['identifier']);
     $password   = $_POST['password'];
 
-    // Busca por usuario o email
+    // Busca por usuario o email, trayendo también el id
     $stmt = $pdo->prepare("
-        SELECT nombre_usuario, password 
-        FROM usuarios 
-        WHERE nombre_usuario = ? OR email = ?
+        SELECT id_usuarios, nombre_usuario, password
+          FROM usuarios 
+         WHERE nombre_usuario = ? OR email = ?
+        LIMIT 1
     ");
     $stmt->execute([$identifier, $identifier]);
-    $user = $stmt->fetch();
+    $row = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password'])) {
-        // Login exitoso
-        $_SESSION['user'] = $user['nombre_usuario'];
+    if ($row && password_verify($password, $row['password'])) {
+        // Login exitoso: guardamos nombre y ID
+        $_SESSION['user']    = $row['nombre_usuario'];
+        $_SESSION['user_id'] = $row['id_usuarios'];
         header('Location: index.php');
         exit;
     } else {

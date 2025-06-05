@@ -1,118 +1,363 @@
 /* catalog.css */
 
-/* Barra de búsqueda */
-.search-bar {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-bottom: 24px;
-}
-
-/* Pestañas de categoría */
-.section-tabs .tab-btn {
-  padding: 10px 20px;
-  margin: 0 8px;
-  border: none;
-  border-radius: 24px;
-  background: var(--light);
-  color: var(--text-color);
-  cursor: pointer;
-  transition: var(--transition);
-}
-.section-tabs .tab-btn.active {
-  background: var(--primary-color);
-  color: #fff;
-}
-
-/* Grid general */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
-  margin-top: 16px;
-}
-
-/* Tarjetas */
-.card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s;
-}
-.card:hover {
-  transform: translateY(-4px);
-}
-.card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-}
-.card-body {
-  padding: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.card-body h3 {
-  margin-bottom: 8px;
-  font-size: 1.2rem;
-}
-.card-body p {
-  flex: 1;
-  font-size: 0.95rem;
-  color: var(--text-color);
-  opacity: 0.8;
-}
-
-/* Acciones */
-.card-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-.card-actions button {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: var(--transition);
-}
-.card-actions button:first-child {
-  background: transparent;
-  color: var(--text-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card-actions button:first-child.liked {
-  color: var(--accent-color);
-}
-.card-actions button:last-child {
-  background: var(--primary-color);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Filtros de literatura */
-.lit-filters {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-.lit-filters label {
-  font-size: 0.95rem;
-  color: var(--text-color);
-}
-.lit-filters input {
-  margin-right: 4px;
-}
-
+/* ------------------------------------------------ 
+   1) RESETEO / VARIABLES 
+   ------------------------------------------------ */
+   :root {
+    --primary-color: #4f46e5;
+    --secondary-color: #8f6bf6;
+    --accent-color: #ec4899;
+    --text-color: #1f2937;
+    --text-muted: #6b7280;
+    --bg-light: #f3f4f6;
+    --card-bg: #ffffff;
+    --transition: all 0.3s ease;
+    --filter-bg: #ffffff;
+    --filter-border: #e5e7eb;
+    --filter-active-bg: #eef2ff;
+    --filter-active-color: #4f46e5;
+  }
+  
+  /* ------------------------------------------------ 
+     2) RESET Y ESTILOS GENERALES 
+     ------------------------------------------------ */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+  }
+  
+  /* ------------------------------------------------ 
+     3) CONTENEDOR PRINCIPAL 
+     ------------------------------------------------ */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  /* ------------------------------------------------ 
+     4) BARRA DE BÚSQUEDA 
+     ------------------------------------------------ */
+  .search-section {
+    padding: 12px 0;
+    background-color: transparent;
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+  }
+  
+  .search-bar:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 12px rgba(79, 70, 229, 0.2);
+  }
+  
+  /* ------------------------------------------------ 
+     5) SECCIÓN DE PESTAÑAS 
+     ------------------------------------------------ */
+  .section-tabs {
+    padding: 8px 0;
+    background-color: transparent;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .section-tabs .container {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .section-tabs .tab-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .section-tabs .tab-btn.active {
+    background: var(--primary-color);
+    color: #ffffff;
+  }
+  
+  .section-tabs .tab-btn:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+  }
+  
+  /* ------------------------------------------------ 
+     6) CONTENEDORES INDIVIDUALES POR CATEGORÍA 
+     ------------------------------------------------ */
+  .catalog {
+    display: none;
+    padding-top: 16px; /* separa ligeramente de la sección de pestañas */
+  }
+  
+  .catalog.active {
+    display: block;
+  }
+  
+  /* ------------------------------------------------ 
+     7) FILTROS DE LITERATURA 
+     ------------------------------------------------ */
+  .lit-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+    background-color: var(--filter-bg);
+    border: 1px solid var(--filter-border);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .lit-filters span {
+    font-weight: 500;
+    margin-right: 8px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  
+  .lit-filters label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--filter-border);
+    border-radius: 999px;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+  }
+  
+  .lit-filters input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+  }
+  
+  .lit-filters input[type="checkbox"]:checked + span {
+    color: var(--filter-active-color);
+  }
+  
+  /* ------------------------------------------------ 
+     8) GRILLA DE TARJETAS 
+     ------------------------------------------------ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  
+  /* ------------------------------------------------ 
+     9) TARJETAS 
+     ------------------------------------------------ */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+  
+  /* Mostrar imagen completa (mantener proporción) */
+  .card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-size: cover;
+  }
+  
+  /* Si no hay miniatura (PDF sin thumb), mostrar ícono centrado */
+  .pdf-icon {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    text-align: center;
+    margin: 30px auto;
+    display: block;
+  }
+  
+  .card-body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-body h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  .card-author {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  /* Estilo de los “género” como etiquetas tipo pill */
+  .genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .genre-tag {
+    display: inline-block;
+    background-color: var(--filter-active-bg);
+    color: var(--filter-active-color);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .genre-tag:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+  }
+  
+  .card-desc {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    opacity: 0.85;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+  }
+  
+  .card-actions button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-actions .like-btn {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--filter-border);
+    border-radius: 8px;
+  }
+  
+  .card-actions .like-btn.liked {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: #fce7f3;
+  }
+  
+  .card-actions .like-btn i {
+    margin-right: 6px;
+  }
+  
+  .card-actions button:last-child {
+    background: var(--primary-color);
+    color: #ffffff;
+  }
+  
+  .card-actions button:last-child:hover {
+    background: var(--secondary-color);
+  }
+  
+  .card-actions button:last-child i {
+    margin-right: 6px;
+  }
+  
+  /* ------------------------------------------------ 
+     10) TEXTO “Sin elementos” 
+     ------------------------------------------------ */
+  .no-items {
+    text-align: center;
+    color: var(--text-muted);
+    opacity: 0.8;
+    padding: 40px 0;
+    font-size: 1rem;
+  }
+  
+  /* ------------------------------------------------ 
+     11) MEDIA QUERIES 
+     ------------------------------------------------ */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .search-section {
+      padding: 10px 0;
+    }
+    .section-tabs {
+      padding: 6px 0;
+    }
+    .lit-filters {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .section-tabs .tab-btn {
+      padding: 6px 14px;
+      font-size: 0.9rem;
+    }
+    .genre-tags {
+      gap: 6px;
+    }
+    .card-body {
+      padding: 12px;
+    }
+    .card-actions button {
+      font-size: 0.85rem;
+      padding: 6px;
+    }
+  }
+  

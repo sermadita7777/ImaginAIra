@@ -1,14 +1,14 @@
 <?php
+// register.php
 session_start();
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recoger datos
     $username = trim($_POST['username']);
     $email    = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validar
+    // Validaciones
     if (strlen($username) < 3) {
         $_SESSION['error'] = 'El nombre de usuario debe tener al menos 3 caracteres.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -19,29 +19,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Comprobar duplicados
         $stmt = $pdo->prepare("
             SELECT id_usuarios 
-            FROM usuarios 
-            WHERE nombre_usuario = ? OR email = ?
+              FROM usuarios 
+             WHERE nombre_usuario = ? OR email = ?
+            LIMIT 1
         ");
         $stmt->execute([$username, $email]);
         if ($stmt->fetch()) {
             $_SESSION['error'] = 'El nombre de usuario o correo ya está en uso.';
         } else {
-            // Insertar
+            // Insertar usuario
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("
                 INSERT INTO usuarios (nombre_usuario, email, password)
                 VALUES (?, ?, ?)
             ");
             $stmt->execute([$username, $email, $hash]);
-
-            // Loguear y redirigir
-            $_SESSION['user'] = $username;
+            // Recuperar su ID
+            $userId = $pdo->lastInsertId();
+            // Guardar en sesión
+            $_SESSION['user']    = $username;
+            $_SESSION['user_id'] = $userId;
             header('Location: index.php');
             exit;
         }
     }
-
-    // Si llegamos aquí, hubo error
+    // Hay error: redirigir
     header('Location: register.php');
     exit;
 }

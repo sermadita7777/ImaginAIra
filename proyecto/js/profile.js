@@ -1,18 +1,20 @@
 // js/profile.js
 document.addEventListener('DOMContentLoaded', () => {
-  // Favoritos: llamar al endpoint para obtener array de likes
-  fetch(`/api/user/${encodeURIComponent(document.querySelector('.profile-info h3 span').textContent)}/likes`)
+  // 1) Llamamos a get_user_likes.php para obtener el array de IDs de contenidos que el usuario ya ha "likeado"
+  fetch('get_user_likes.php')
     .then(res => res.json())
-    .then(data => {
+    .then(userLikesArray => {
+      // userLikesArray debería ser algo como [3, 17, 25, ...]
       const favCountEl = document.getElementById('favCount');
-      if (favCountEl) favCountEl.textContent = Array.isArray(data) ? data.length : 0;
+      if (favCountEl) {
+        // Actualizamos el contador con la longitud del array
+        favCountEl.textContent = Array.isArray(userLikesArray)
+          ? userLikesArray.length
+          : 0;
+      }
     })
-    .catch(() => {
-      // Si no hay API, lo dejamos a 0 o podrías ocultar
+    .catch(err => {
+      console.error('Error al obtener favoritos:', err);
+      // Dejamos el contador a 0 si algo falla
     });
-
-  // Carrito: leer de localStorage
-  const cart = JSON.parse(localStorage.getItem('iaCart') || '[]');
-  const cartCountEl = document.getElementById('cartItemCount');
-  if (cartCountEl) cartCountEl.textContent = cart.length;
 });

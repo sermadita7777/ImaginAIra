@@ -1,3 +1,4 @@
+// cookies.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const banner = document.getElementById('cookie-banner');

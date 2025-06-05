@@ -1,3 +1,21 @@
+<?php
+session_start();
+require 'db.php';
+
+$user = $_SESSION['user'] ?? null;
+$mostrarAdmin = false;
+
+if ($user) {
+    // Obtener rol del usuario logueado
+    $stmt = $pdo->prepare("SELECT rol FROM usuarios WHERE nombre_usuario = ?");
+    $stmt->execute([$user]);
+    $rol = $stmt->fetchColumn();
+    if ($rol === 'admin') {
+        $mostrarAdmin = true;
+    }
+}
+?>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
@@ -11,7 +29,9 @@
           <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="catalog.php">Catálogo</a></li>
-            <li><a href="admin.php">Administración</a></li>
+            <?php if ($mostrarAdmin): ?>
+              <li><a href="admin.php">Administración</a></li>
+            <?php endif; ?>
           </ul>
         </div>
         <div class="footer-column">
@@ -19,7 +39,7 @@
           <ul>
             <li><a href="#">Términos de Uso</a></li>
             <li><a href="#">Política de Privacidad</a></li>
-            <li><a href="#">Cookies</a></li>
+            <li><a href="politica-cookies.html">Cookies</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -32,7 +52,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <?=date('Y')?> IA-Lovers. Todos los derechos reservados.</p>
+      <p>&copy; <?= date('Y') ?> IA-Lovers. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
