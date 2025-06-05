@@ -1,13 +1,23 @@
+/* Variables de colores y estilos */
 :root {
-    --primary-color: #4f46e5; /* Púrpura/Indigo - Color principal de IA-Lovers */
-    --secondary-color: #8b5cf6; /* Violeta - Complementario */
-    --accent-color: #ec4899; /* Rosa - Para destacados */
-    --green-accent: #4ade80; /* Verde - Para acciones positivas */
-    --text-color: #1f2937; /* Gris oscuro para texto */
-    --light-text: #f8f9fa; /* Texto claro */
-    --bg-light: #f3f4f6; /* Fondo claro */
-    --bg-dark: #1f2937; /* Fondo oscuro */
-    --card-bg: #ffffff; /* Fondo de tarjetas */
+    --primary-color: #4f46e5;
+    /* Púrpura/Indigo - Color principal de IA-Lovers */
+    --secondary-color: #8b5cf6;
+    /* Violeta - Complementario */
+    --accent-color: #ec4899;
+    /* Rosa - Para destacados */
+    --green-accent: #4ade80;
+    /* Verde - Para acciones positivas */
+    --text-color: #1f2937;
+    /* Gris oscuro para texto */
+    --light-text: #f8f9fa;
+    /* Texto claro */
+    --bg-light: #f3f4f6;
+    /* Fondo claro */
+    --bg-dark: #1f2937;
+    /* Fondo oscuro */
+    --card-bg: #ffffff;
+    /* Fondo de tarjetas */
     --transition: all 0.3s ease;
 }
 
@@ -125,90 +135,7 @@ section {
     font-size: 0.9rem;
 }
 
-/* Navegación */
-.navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 15px 0;
-}
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-.logo img {
-    height: 40px;
-    margin-right: 10px;
-}
-
-.highlight {
-    color: var(--primary-color);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-}
-
-.nav-links li {
-    margin-left: 30px;
-}
-
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--primary-color);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.nav-links a:hover::after, .nav-links a.active::after {
-    width: 100%;
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    margin: 5px 0;
-    transition: var(--transition);
-}
 
 /* Animación del menú hamburguesa */
 .hamburger.active span:nth-child(1) {

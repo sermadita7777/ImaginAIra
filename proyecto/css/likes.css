@@ -72,3 +72,9 @@ h2 {
   color: #fff;
   cursor: pointer;
 }
+.card-author {
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+

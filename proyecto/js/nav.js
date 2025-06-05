@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Inicializar la funcionalidad del menú hamburguesa para dispositivos móviles
     initMobileMenu();
+
 });
 
 /**
@@ -54,5 +55,4 @@ function initMobileMenu() {
         });
     }
 }
-
 

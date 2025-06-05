@@ -3,6 +3,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Inicializar la funcionalidad del menú hamburguesa para dispositivos móviles
     initMobileMenu();
+    clearCart();
+    downloadAll();
 });
 
 /**
@@ -55,4 +57,20 @@ function initMobileMenu() {
     }
 }
 
+function clearCart(){
+    document.getElementById('clear-cart').addEventListener('click', function() {
+        if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+            localStorage.setItem('iaCart', '[]');
+            document.getElementById('cartList').innerHTML = '';
+            document.getElementById('cartList').style.display = 'none';
+            document.getElementById('empty-cart').style.display = 'block';
+            document.getElementById('cartCount').textContent = '0';
+        }
+    });
+}
 
+function downloadAll() {
+    document.getElementById('downloadALL').addEventListener('click', function () {
+        window.location.href = 'downloadALL.php';
+    });
+}
